@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author aluno
+ * @author emerson
  */
 public abstract class DAOGenerico<P> {
     protected EntityManager manager;
