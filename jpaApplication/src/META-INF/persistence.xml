@@ -6,6 +6,7 @@
     <class>br.edu.ifnmg.jpa.DomainModel.Email</class>
     <class>br.edu.ifnmg.jpa.DomainModel.TipoPessoa</class>
     <class>br.edu.ifnmg.jpa.DomainModel.Endereco</class>
+    <class>br.edu.ifnmg.jpa.DomainModel.Professor</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BancoJpa"/>
       <property name="javax.persistence.jdbc.password" value="123456"/>
