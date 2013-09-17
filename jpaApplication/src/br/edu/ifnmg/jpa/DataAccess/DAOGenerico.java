@@ -24,7 +24,6 @@ public abstract class DAOGenerico<P> {
         pessoa = p;
     }
     
-    
     public boolean Salvar(P obj){
         //Obter Transação
         EntityTransaction transacao = manager.getTransaction();
