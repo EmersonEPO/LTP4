@@ -4,11 +4,12 @@
  */
 package br.edu.ifnmg.jpa.DomainModel;
 
+import br.edu.ifnmg.jpa.DataAccess.AlunoDAO;
+import br.edu.ifnmg.jpa.DataAccess.DAOGenerico;
+import br.edu.ifnmg.jpa.DataAccess.TipoPessoaDAO;
 import java.util.Date;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,92 +17,75 @@ import javax.persistence.Persistence;
  */
 public class ClasseTeste {
     public static void main(String[] args){
-        
-        //"Criando" Gerenciador de entidades
-        EntityManager manager;
-        EntityManagerFactory factory;
-        //-----
-        factory = Persistence.createEntityManagerFactory("Persistencia"); //Esse nome se encontra no arq persistencia.xml
-        manager = factory.createEntityManager();
-        
-        //Inicio dos Testes
-        
-        //Aqui iniciei uma nova Transação
-        EntityTransaction transacaoOne = manager.getTransaction();
-        
+          
         //Criando objeto e setando um valor
+        /*
         TipoPessoa tipo = new TipoPessoa();
         tipo.setNomeTipo("Aluno");
         //Fim
-        
+       
         try{
-            
-            //Iniciando transacao
-            transacaoOne.begin();
-            
-            //Persistindo os dados no banco
-            manager.persist(tipo);
-            
-            //Se tudo ocorreu corretamente será dado um commit
-            transacaoOne.commit();
+            //Iniciando DAO
+            TipoPessoaDAO daoTipo = new TipoPessoaDAO();
+        
+            //Persistindo dados
+            daoTipo.Salvar(tipo);
             
         }catch(Exception ex){
-            //Aqui acontecerá um rollback caso ocorra algum erro na transação
-            transacaoOne.rollback();
-            //Mensagem informando onde ocorreu o erro
-            System.out.printf("Erro na PRIMEIRA transação LOCAL >> ClasseTeste - Linha 18");
+            System.out.printf("Erro ClasseTeste - Prox. Linha 23");
         }
+        */
         
-        /*NOTA : Agora que eu persistir no banco o tipo de pessoa posso dar sequencia ao restante dos dados*/
-        
-        //Aqui é preciso iniciar uma nova transação, já que uma vez feito um commit a transaçaõ termina
-        //mudei o nome da variavel para não ter confusão, mas posso ultilizar o mesmo nome da primeira transação
-        //Iniciando Transação
-        EntityTransaction transacaoTwo = manager.getTransaction();
-        
+        /*NOTA : Agora que eu persistir no banco o tipo de pessoa posso dar 
+         * sequencia ao restante dos dados*/
+       /*
         try{
-            //Iniciando transação
-            transacaoTwo.begin();
+            //Iniciando DAO
+            AlunoDAO daoAluno = new AlunoDAO();
             
             //Criando os Objetos
             Email email = new Email();
             Endereco endereco = new Endereco();
-            Pessoa pessoa = new Pessoa();
+            Aluno aluno = new Aluno();
             
             //Setando valores
-            pessoa.setNomePessoa("Emerson Pereira");
-            pessoa.setRgPessoa(1); //Apenas para efeito de testes
-            pessoa.setCpfPessoa(2); //Apenas para efeito de testes
-            pessoa.setDataNascimento(new Date()); //Apenas para efeito de testes
+            aluno.setNomePessoa("Emerson Pereira");
+            aluno.setRgPessoa(11111); //Apenas para efeito de testes
+            aluno.setCpfPessoa(22222); //Apenas para efeito de testes
+            aluno.setDataNascimento(new Date()); //Apenas para efeito de testes
+            aluno.setMatricula("IF2011");
             
             //Setando tipo de Pessoa já persistido no banco
-            pessoa.setTipo(tipo);
+            aluno.setTipo(tipo);
             
             //Setando Email
-            email.setEndEmail("emerson@emerson");
-            pessoa.addEmail(email);
+            email.setEndEmail("emerson@emerson.com.br");
+            aluno.addEmail(email);
             
             //Setando Endereço
-            endereco.setRua("A");
+            endereco.setRua("A1");
             endereco.setNum(100);
-            endereco.setBairro("Azul");
-            pessoa.addEndereco(endereco);
+            endereco.setBairro("Preto");
+            aluno.addEndereco(endereco);
             
-            //Persistindo dados no banco
-            manager.persist(pessoa);
-            
-            //Se tudo ocorreu corretamente será dado um commit
-            transacaoTwo.commit();
-            
-            
+            daoAluno.Excluir(aluno);
+           
         }catch(Exception ex){
-            //Aqui acontecerá um rollback caso ocorra algum erro na transação
-            transacaoTwo.rollback();
             //Mensagem informando onde ocorreu o erro
-            System.out.printf("Erro na SEGUNDA transação LOCAL >> ClasseTeste - Linha 61");
+            System.out.printf("Erro ClasseTeste - Prox. Linha 40");
         }
-        //Fim dos Testes
+        */
+    
+        try{
+            AlunoDAO dao = new AlunoDAO();
+            //-----
+            List<Aluno> listar = dao.ListaTodos();
+            //-----
+            JOptionPane.showMessageDialog(null, listar);
+        }catch(Exception ex){
         
+        }
+        //Fim dos Testes  
     }
     
 }
