@@ -19,13 +19,13 @@ public class TipoPessoaDAO extends DAOGenerico<TipoPessoa> {
     }
     
      public List<TipoPessoa> BuscaTipoPorNome(String nome){
-        Query consulta = manager.createQuery("select t from TipoPessoa t where  nome = :p0");
+        Query consulta = manager.createQuery("select t from TiposPessoas t where  nome = :p0");
         //Retorna consulta
         return consulta.setParameter("p0", nome).getResultList();
     }
     
     public List<TipoPessoa> ListaTodos(){
-        Query consulta = manager.createQuery("select t from TipoPessoa p");
+        Query consulta = manager.createQuery("select t from TiposPessoas p");
         //Retorna consulta
         return consulta.getResultList();
     }
